@@ -5,11 +5,12 @@ import java.util.Map;
 
 public class EncodDecodHuffman {
 
-    private static Map<Character, String> charPrefixHashMap = new HashMap<>();
-    static Node root;
+    public static Map<Character, String> charPrefixHashMap = new HashMap<>();
+    public static Node root;
+    public static String vocabularyTable;
 
 
-    private static Node buildTree(Map<Character, Integer> freq) {
+    public static Node buildTree(Map<Character, Integer> freq) {
 
         PriorityQueue<Node> priorityQueue = new PriorityQueue<>();
         Set<Character> keySet = freq.keySet();
@@ -76,7 +77,9 @@ public class EncodDecodHuffman {
         root = buildTree(freq);
 
         setPrefixCodes(root, new StringBuilder());
-        System.out.println("Character Prefix Map = " + charPrefixHashMap);
+        //System.out.println("Character vocabulary Map = " + charPrefixHashMap);
+        vocabularyTable = "Character vocabulary Map = " + charPrefixHashMap;
+        System.out.println(vocabularyTable);
         StringBuilder stringBuilder = new StringBuilder();
 
         for (int i = 0; i < test.length(); i++) {
@@ -113,6 +116,9 @@ public class EncodDecodHuffman {
         System.out.println("Decoded string is " + stringBuilder.toString());
         return stringBuilder;
 
+    }
+    public String getVocabularyTable(){
+        return vocabularyTable;
     }
 }
 
