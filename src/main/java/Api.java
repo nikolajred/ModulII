@@ -1,4 +1,5 @@
 import DecoderHuffman.DecoderHuffman;
+import EncoderHuffman.EncoderHuffman;
 
 import java.io.*;
 import java.util.logging.Logger;
@@ -17,23 +18,26 @@ public class Api {
 
 
         if (path.charAt(path.length() - 3) == '.' && path.charAt(path.length() - 2) == 'h' && path.charAt(path.length() - 1) == 'f') {
-            pathTable = args[1];
-            if (pathTable != null) {
+            try {
+                pathTable = args[1];
                 DecoderHuffman decoderHuffman = new DecoderHuffman();
                 decoderHuffman.decode(path, pathTable);
-            } else {
+            } catch (Exception e) {
                 log.warning("Decoding wont be execute without encoding table, pleas enter encoding table as second argument");
             }
+
         } else {
 
-            String test = converter.bytConvertToString(path);
+            /*String test = converter.bytConvertToString(path);
             String string = code.encode(test);
             StringToByteArray strToByteArray = new StringToByteArray();
             writerEncodeCod(strToByteArray.stringToByteArray(string));
 
             EncodDecodHuffman encodDecodHuffman = new EncodDecodHuffman();
             VocabularyTable vocabularyTable = new VocabularyTable();
-            vocabularyTable.writervocabularyTable(encodDecodHuffman.getVocabularyTable());
+            vocabularyTable.writervocabularyTable(encodDecodHuffman.getVocabularyTable());*/
+            EncoderHuffman encoderHuffman = new EncoderHuffman();
+            encoderHuffman.encode(path);
         }
     }
 

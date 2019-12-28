@@ -20,7 +20,7 @@ public class FileReader implements Closeable {
 
     public byte readByte() throws IOException {
         int cur = fileInputStream.read();
-        if (cur == -1)//если закончился файл
+        if (cur == -1)
             throw new EOFException();
         return (byte)cur;
     }
