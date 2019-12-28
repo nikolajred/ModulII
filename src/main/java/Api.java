@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 
 public class Api {
     public static String path;
+    public static String pathTable;
     private static Logger log = Logger.getLogger(EncodDecodHuffman.class.getName());
 
     public static void main(String[] args) throws IOException {
@@ -12,15 +13,19 @@ public class Api {
 
 
         BytConvertToString converter = new BytConvertToString();
-        String path = args[0];
-        String pathTable = args[1];
+        path = args[0];
 
-        if ((path.charAt(path.length() - 3) == '.' && path.charAt(path.length() - 2) == 'h' && path.charAt(path.length() - 1) == 'f') &&
-                (pathTable != null)) {
-            DecoderHuffman decoderHuffman = new DecoderHuffman();
-            decoderHuffman.decode(path, pathTable);
-        } else if(pathTable == null){
-            log.warning("Decoding wont be execute without encoding table, pleas enter encoding table as second argument");
+
+        if (path.charAt(path.length() - 3) == '.' && path.charAt(path.length() - 2) == 'h' && path.charAt(path.length() - 1) == 'f') {
+            pathTable = args[1];
+            if (pathTable != null) {
+                DecoderHuffman decoderHuffman = new DecoderHuffman();
+                decoderHuffman.decode(path, pathTable);
+            } else {
+                log.warning("Decoding wont be execute without encoding table, pleas enter encoding table as second argument");
+            }
+        } else {
+
             String test = converter.bytConvertToString(path);
             String string = code.encode(test);
             StringToByteArray strToByteArray = new StringToByteArray();
