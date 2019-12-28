@@ -6,19 +6,19 @@ public class Api {
         EncodDecodHuffman code = new EncodDecodHuffman();
 
 
-        File file = new File();
+        BytConvertToString converter = new BytConvertToString();
         String path = args[0];
 
         if (path.charAt(path.length() - 3) == '.' && path.charAt(path.length() - 2) == 'h' && path.charAt(path.length() - 1) == 'f') {
-            String string = file.allConvertToByt(path);
+            String string = converter.bytConvertToString(path);
             StringBuilder stringBuilder = code.decode(string);
             String decodeFile = stringBuilder.toString();
             writerDecodeText(decodeFile);
         } else {
-            String test = file.allConvertToByt(path);
+            String test = converter.bytConvertToString(path);
             String string = code.encode(test);
-            StringToByteArray stringToByteArray = new StringToByteArray();
-            writerEncodeCod(stringToByteArray.stringToByteArray(string));
+            StringToByteArray strToByteArray = new StringToByteArray();
+            writerEncodeCod(strToByteArray.stringToByteArray(string));
 
             EncodDecodHuffman encodDecodHuffman = new EncodDecodHuffman();
             VocabularyTable vocabularyTable = new VocabularyTable();
@@ -41,9 +41,9 @@ public class Api {
     }
 
     public static void writerEncodeCod(byte [] bytesArray) throws IOException {
-        FileOutputStream fos = new FileOutputStream("encode.hf");
-        fos.write(bytesArray);
-        fos.close();
+        FileOutputStream fileOutputStream = new FileOutputStream("encode.hf");
+        fileOutputStream.write(bytesArray);
+        fileOutputStream.close();
     }
 
 }

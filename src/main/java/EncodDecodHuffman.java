@@ -2,12 +2,14 @@ import java.util.PriorityQueue;
 import java.util.Set;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
 
 public class EncodDecodHuffman {
 
     public Map<Character, String> charPrefixHashMap = new HashMap<>();
     public Node root;
     public static String vocabularyTable;
+    private static Logger log = Logger.getLogger(EncodDecodHuffman.class.getName());
 
 
     public Node buildTree(Map<Character, Integer> freq) {
@@ -72,21 +74,20 @@ public class EncodDecodHuffman {
             }
             freq.put(test.charAt(i), freq.get(test.charAt(i)) + 1);
         }
-
-        System.out.println("Character Frequency Map = " + freq);
+        log.info("Character Frequency Map = " + freq);
         root = buildTree(freq);
 
         setPrefixCodes(root, new StringBuilder());
-
         vocabularyTable = "Character vocabulary Map = " + charPrefixHashMap;
-        System.out.println(vocabularyTable);
+        log.info(vocabularyTable);
         StringBuilder stringBuilder = new StringBuilder();
 
         for (int i = 0; i < test.length(); i++) {
             char c = test.charAt(i);
             stringBuilder.append(charPrefixHashMap.get(c));
+
         }
-        System.out.println("Encoded: " + stringBuilder.toString());
+        log.info("Encoded: " + stringBuilder.toString());
         return stringBuilder.toString();
     }
 
@@ -119,7 +120,7 @@ public class EncodDecodHuffman {
                 }
             }
         }
-        System.out.println("Decoded string is " + stringBuilder.toString());
+        log.info("Decoded string is " + stringBuilder.toString());
         return stringBuilder;
 
     }
