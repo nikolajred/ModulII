@@ -19,8 +19,8 @@ public class Api {
             String string = code.encode(test);
             StringToByteArray stringToByteArray = new StringToByteArray();
             writerEncodeCod(stringToByteArray.stringToByteArray(string));
-            EncodDecodHuffman encodDecodHuffman = new EncodDecodHuffman();
 
+            EncodDecodHuffman encodDecodHuffman = new EncodDecodHuffman();
             VocabularyTable vocabularyTable = new VocabularyTable();
             vocabularyTable.writervocabularyTable(encodDecodHuffman.getVocabularyTable());
 

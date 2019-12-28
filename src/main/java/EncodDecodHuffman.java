@@ -5,12 +5,12 @@ import java.util.Map;
 
 public class EncodDecodHuffman {
 
-    public static Map<Character, String> charPrefixHashMap = new HashMap<>();
-    public static Node root;
+    public Map<Character, String> charPrefixHashMap = new HashMap<>();
+    public Node root;
     public static String vocabularyTable;
 
 
-    public static Node buildTree(Map<Character, Integer> freq) {
+    public Node buildTree(Map<Character, Integer> freq) {
 
         PriorityQueue<Node> priorityQueue = new PriorityQueue<>();
         Set<Character> keySet = freq.keySet();
@@ -45,7 +45,7 @@ public class EncodDecodHuffman {
     }
 
 
-    private static void setPrefixCodes(Node node, StringBuilder prefix) {
+    public void setPrefixCodes(Node node, StringBuilder prefix) {
 
         if (node != null) {
             if (node.leftChild == null && node.rightChild == null) {
@@ -64,7 +64,7 @@ public class EncodDecodHuffman {
 
     }
 
-    public static String encode(String test) {
+    public String encode(String test) {
         Map<Character, Integer> freq = new HashMap<>();
         for (int i = 0; i < test.length(); i++) {
             if (!freq.containsKey(test.charAt(i))) {
@@ -77,7 +77,7 @@ public class EncodDecodHuffman {
         root = buildTree(freq);
 
         setPrefixCodes(root, new StringBuilder());
-        //System.out.println("Character vocabulary Map = " + charPrefixHashMap);
+
         vocabularyTable = "Character vocabulary Map = " + charPrefixHashMap;
         System.out.println(vocabularyTable);
         StringBuilder stringBuilder = new StringBuilder();
@@ -90,7 +90,13 @@ public class EncodDecodHuffman {
         return stringBuilder.toString();
     }
 
-    public static StringBuilder decode(String string) {
+    public String getVocabularyTable() {
+        vocabularyTable = vocabularyTable.substring(26).replace('{', ' ').replace('}', ' ').trim();
+        return vocabularyTable;
+    }
+
+
+    public StringBuilder decode(String string) {
 
         StringBuilder stringBuilder = new StringBuilder();
 
@@ -117,9 +123,8 @@ public class EncodDecodHuffman {
         return stringBuilder;
 
     }
-    public String getVocabularyTable(){
-        return vocabularyTable;
-    }
+
+
 }
 
 
