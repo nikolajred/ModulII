@@ -6,9 +6,11 @@ import java.util.logging.Logger;
 
 public class EncodDecodHuffman {
 
-    public Map<Character, String> charPrefixHashMap = new HashMap<>();
+    public static Map<Character, String> charPrefixHashMap = new HashMap<>();
+
+
     public Node root;
-    public static String vocabularyTable;
+    public String vocabularyTable = "";
     private static Logger log = Logger.getLogger(EncodDecodHuffman.class.getName());
 
 
@@ -92,7 +94,8 @@ public class EncodDecodHuffman {
     }
 
     public String getVocabularyTable() {
-        vocabularyTable = vocabularyTable.substring(26).replace('{', ' ').replace('}', ' ').trim();
+        for (Map.Entry<Character, String> entry : charPrefixHashMap.entrySet())
+            vocabularyTable += (entry.getKey() + "" + entry.getValue());
         return vocabularyTable;
     }
 
